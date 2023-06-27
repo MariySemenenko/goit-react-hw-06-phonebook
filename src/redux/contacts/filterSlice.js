@@ -1,16 +1,15 @@
-
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const filterSlice = createSlice({
   // Ім'я слайсу
-  name: "filter",
+  name: 'filter',
   // Початковий стан редюсера слайсу
   initialState: '',
   // Об'єкт редюсерів
   reducers: {
- setFilter(_, action) {
-    return action.payload
- }
+    setFilter(_, action) {
+      return action.payload;
+    },
   },
 });
 
