@@ -1,12 +1,18 @@
-import PropTypes from 'prop-types';
+
+import { useDispatch, useSelector } from 'react-redux';
 import { Ul } from '../StyledApp.styled';
+import { selectVisibleContacts } from 'redux/contacts/selectors';
+import { deleteContact } from 'redux/contacts/contactsSlice';
 
 // відображаю список контактів і маю можливість видаляти контакт зі списку
 //при кліку на кнопку виконується функція onDeletContacts
-export const ContactList = ({ contacts, onDeletContacts }) => {
+export const ContactList = () => {
+  const contactsList = useSelector(selectVisibleContacts)
+  const dispatch = useDispatch()
   return (
     <Ul>
-      {contacts.map(
+
+      {contactsList.map(
         (
           { name, number, id } // кожен контакт має властивість name, number, id
         ) => (
@@ -15,7 +21,7 @@ export const ContactList = ({ contacts, onDeletContacts }) => {
               {name}: {number}
             </p>
 
-            <button type="button" onClick={() => onDeletContacts(id)}>
+            <button type="button" onClick={() => dispatch(deleteContact(id))}>
               Delete
             </button>
           </li>
@@ -25,13 +31,4 @@ export const ContactList = ({ contacts, onDeletContacts }) => {
   );
 };
 
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-    })
-  ),
-  onDeletContacts: PropTypes.func.isRequired,
-};
+

@@ -1,28 +1,39 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
-import { Form } from '../StyledApp.styled';
 
-export const ContactForm = ({ onSubmitData }) => {
+import { Form } from '../StyledApp.styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'redux/contacts/contactsSlice';
+import { selectContacts } from 'redux/contacts/selectors';
+
+export const ContactForm = () => {
   const [data, setData] = useState({ name: '', number: '' });
   //тут зберігається імя та номер
-
+const contacts = useSelector(selectContacts)
+  const dispatch = useDispatch()
   const handleChange = ({ currentTarget }) => {
     const { name, value } = currentTarget; //отримую доступ до значення поля за допомогою currentTarget
     setData(prevData => ({ ...prevData, [name]: value })); //оновлюю ключ у стейті за допомогою динамічного ключа
   };
 
   const handleSubmit = e => {
+    const {name, number} = data
     e.preventDefault();
+if(contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase() || 
+contact.number === number
+
+))
+{
+  setData({ name: '', number: '' });
+  return alert(`${name } or ${number} is already in contacts`)
+}
 
     //тут створюється новий об'єкт newContact
     const newContact = {
       id: nanoid(),
       ...data,
     };
-    onSubmitData(newContact); //передаю колбекom (App addContact) для нового контакту та
-    //скидання значень до початкових.
-
+    dispatch(addContact(newContact))
     setData({ name: '', number: '' });
   };
 
@@ -63,9 +74,6 @@ export const ContactForm = ({ onSubmitData }) => {
   );
 };
 
-ContactForm.propType = {
-  onSubmitData: PropTypes.func.isRequired,
-};
 
 
 //or

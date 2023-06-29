@@ -15,10 +15,13 @@ const contactsSlice = createSlice({
   // Об'єкт редюсерів
   reducers: {
     addContact(state, action) {
+      // console.log(action.payload)
       state.items.push(action.payload);
     },
     deleteContact(state, action) {
+      // console.log(action.payload)
       state.items = state.items.filter(item => item.id !== action.payload);
+
     },
   },
 });

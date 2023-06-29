@@ -8,6 +8,7 @@ const filterSlice = createSlice({
   // Об'єкт редюсерів
   reducers: {
     setFilter(_, action) {
+      // console.log(action.payload)
       return action.payload;
     },
   },
