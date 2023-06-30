@@ -5,9 +5,10 @@ import { selectVisibleContacts } from 'redux/contacts/selectors';
 import { deleteContact } from 'redux/contacts/contactsSlice';
 
 // відображаю список контактів і маю можливість видаляти контакт зі списку
-//при кліку на кнопку виконується функція onDeletContacts
+
 export const ContactList = () => {
   const contactsList = useSelector(selectVisibleContacts)
+  //через dispatch видаляю контакти
   const dispatch = useDispatch()
   return (
     <Ul>

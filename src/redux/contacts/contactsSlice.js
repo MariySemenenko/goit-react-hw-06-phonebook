@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+//цей слайс відповідає за контакти
 
 const contactsSlice = createSlice({
   // Ім'я слайсу
   name: 'contacts',
-  // Початковий стан редюсера слайсу
+  // Початковий стан редюсера слайсу записую в persist(local)
   initialState: {
     items: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -13,20 +14,25 @@ const contactsSlice = createSlice({
     ],
   },
   // Об'єкт редюсерів
+  //створюю екшени для додавання та видалення контактів
   reducers: {
+    //додаю цей метод у форму
     addContact(state, action) {
       // console.log(action.payload)
       state.items.push(action.payload);
     },
+    //додаю цей метод у contactList
     deleteContact(state, action) {
       // console.log(action.payload)
+
       state.items = state.items.filter(item => item.id !== action.payload);
 
     },
   },
 });
 
-// Генератори екшенів
+// Генератори екшенів які визиваються через dispatch
+//mетоди для додавання та видалення контактів
 export const { addContact, deleteContact } = contactsSlice.actions;
-// Редюсер слайсу
+// це редюсер контактів імпортую в store.js
 export const contactsReducer = contactsSlice.reducer;

@@ -2,11 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Label } from '../StyledApp.styled';
 import { selectFilter } from 'redux/contacts/selectors';
 import { setFilter } from 'redux/contacts/filterSlice';
-//поле введення яке фільтрує контакти за іменем
-//value поточне значення при введені
-//onChange спрацьовує на зміни і передає нове значення
+
+//тут виконується пошук імені в телефонній книзі
+
 export const Filter = () => {
-  //пропси
+  //value={filter} це фільтр який витягую з редаксу filterSlice та передаю через dispatch
   const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
   return (

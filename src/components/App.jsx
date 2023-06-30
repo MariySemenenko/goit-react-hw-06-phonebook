@@ -6,6 +6,7 @@ import { Div, H2 } from './StyledApp.styled';
 import { selectContacts } from 'redux/contacts/selectors';
 
 export const App = () => {
+  //додаю контакти з файлу  selectors.js 
   const contacts = useSelector(selectContacts);
   //  console.log(contacts)
   return (
